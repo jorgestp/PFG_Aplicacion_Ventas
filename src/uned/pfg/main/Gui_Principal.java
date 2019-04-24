@@ -65,7 +65,7 @@ public class Gui_Principal extends JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
        
-    	new JFrameEjemplo().setVisible(true);
+    	new Gui_Pedido().setVisible(true);
     	
 
 
