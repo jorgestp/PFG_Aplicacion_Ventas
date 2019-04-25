@@ -3,9 +3,13 @@ package uned.pfg.main;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
+import uned.pfg.bean.Articulo;
 import uned.pfg.bean.Distribuidor;
+import uned.pfg.logica.ServicioArticulos;
+import uned.pfg.logica.ServicioArticulos_Pedido;
 import uned.pfg.logica.ServicioObtenerDistribuidor;
 
 /**
@@ -101,7 +105,7 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 
        InfoArticulo.setText("Seleccione articulo");
 
-       articuloSeleccionado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+       articuloSeleccionado.setModel(new DefaultComboBoxModel<String>(Articulos()));
        articuloSeleccionado.addItemListener(new java.awt.event.ItemListener() {
            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                articuloSeleccionadoItemStateChanged(evt);
@@ -324,7 +328,9 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
        pack();
    }// </editor-fold>                        
 
-   private void JCombo_distribuidoresItemStateChanged(java.awt.event.ItemEvent evt) {                                                       
+
+
+private void JCombo_distribuidoresItemStateChanged(java.awt.event.ItemEvent evt) {                                                       
        // TODO add your handling code here:
    }                                                      
 
@@ -377,11 +383,11 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 	   ServicioObtenerDistribuidor servicio = new ServicioObtenerDistribuidor();
 	   List<Distribuidor> listaDis = servicio.parseXMLtoList();
 	   
-	   String[] distribuidores = new String[listaDis.size()];
+	   String[] distribuidores = new String[listaDis.size()+1];
 	   
 	   Iterator<Distribuidor> it = listaDis.iterator();
-	   
-	   int i =0;
+	   distribuidores[0] = "Selec. Distribuidor";
+	   int i =1;
 	   while(it.hasNext()) {
 		   
 		   Distribuidor d = it.next();
@@ -395,6 +401,27 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 	   
 	   
    }
+   
+   
+   private String[] Articulos() {
+	   
+	   ServicioArticulos servicioArt = new ServicioArticulos();
+	   
+	   List<Articulo> listaArt = servicioArt.parseXMLtoList();
+	   Iterator<Articulo> it = listaArt.iterator();
+	   
+	   String[] articulos = new String[listaArt.size()+1];
+	   articulos[0] = "Selec. Artículo";
+	   int i =1;
+	   while(it.hasNext()) {
+		   
+		   Articulo a = it.next();
+		   articulos[i] = a.getNombre();
+		   i++;
+	   }
+	   
+	   return articulos;
+}
 
    // Variables declaration - do not modify                     
    private javax.swing.JButton AnadirArticulo;

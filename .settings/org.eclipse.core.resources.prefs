@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
+encoding//src/uned/pfg/ws/WS_Articulo.java=UTF-8
+encoding//src/uned/pfg/ws/WS_ArticuloService.java=UTF-8
+encoding//src/uned/pfg/ws/WS_ArticuloServiceLocator.java=UTF-8
+encoding//src/uned/pfg/ws/WS_ArticuloSoapBindingStub.java=UTF-8
 encoding//src/uned/pfg/ws/WS_ArticulosPedido.java=UTF-8
 encoding//src/uned/pfg/ws/WS_ArticulosPedidoService.java=UTF-8
 encoding//src/uned/pfg/ws/WS_ArticulosPedidoServiceLocator.java=UTF-8
