@@ -1,5 +1,7 @@
 package uned.pfg.main;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -72,6 +74,7 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
        pedido = new javax.swing.JButton();
        modelo = new DefaultTableModel();
        listaArt = new ArrayList<Articulo>();
+       fila =-1;
        
        modelo = new DefaultTableModel(filas, columnas);
        Tabla.setModel(modelo);
@@ -329,6 +332,32 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
        );
 
        pack();
+       
+       Tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+           public void mouseClicked(java.awt.event.MouseEvent evt) {
+               
+				 fila = Tabla.rowAtPoint(evt.getPoint());
+				
+           }
+       });
+       
+       botonEliminar.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			if(fila == -1) {
+				   JOptionPane.showMessageDialog(null, "Seleccione un articulo de la "
+				   		+ "tabla para eliminar", "Ventas", 2);
+				
+			}else {
+				
+				modelo.removeRow(fila);
+			}
+			
+			
+		}
+	});
    }// </editor-fold>                        
 
 
@@ -541,5 +570,6 @@ private boolean isNumero(String cantidad) {
    private Object [][]filas;
    private Object [] columnas = {"NOMBRE", "PRECIO", "CANTIDAD", "OTROS"};
    List<Articulo> listaArt;
+   int fila;
    // End of variables declaration                   
 }
