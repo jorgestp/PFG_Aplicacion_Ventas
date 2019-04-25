@@ -1,9 +1,11 @@
 package uned.pfg.main;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import uned.pfg.bean.Articulo;
@@ -69,6 +71,7 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
        precio = new javax.swing.JLabel();
        pedido = new javax.swing.JButton();
        modelo = new DefaultTableModel();
+       listaArt = new ArrayList<Articulo>();
        
        modelo = new DefaultTableModel(filas, columnas);
        Tabla.setModel(modelo);
@@ -339,10 +342,86 @@ private void JCombo_distribuidoresItemStateChanged(java.awt.event.ItemEvent evt)
    }                                                     
 
    private void AnadirArticuloActionPerformed(java.awt.event.ActionEvent evt) {                                               
-       // TODO add your handling code here:
-   }                                              
+       
+	   
+	   String seleccion = articuloSeleccionado.getSelectedItem().toString();
+	   
+	   String cantidad = textCantidad.getText();
+	   
+	   
+	
+	   if(seleccion.equalsIgnoreCase("Selec. Artículo") || !isNumero(cantidad)) {
+		   
+		   JOptionPane.showMessageDialog(null, "No ha seleccionado un articulo"
+		   		+ " o la cantidad no es un valor numerico..", "Ventas", 2);
+	   }else {
+		   
+		   Object [] row = {seleccion, buscaPrecio(seleccion), Integer.parseInt(cantidad)};
+		   	  
+		   if(!isPedido(row)) {
+			   
+			   modelo.addRow(row);
+			   numArticulos.setText(String.valueOf(modelo.getRowCount()));
+		   }
+	   }//fin else
+	   
+	   textCantidad.setText("");
+	   
+   } //fin metodo                                            
 
-   /**
+   private boolean isPedido(Object[] row ) {
+	
+	   for(int i=0; i< modelo.getRowCount();i++) {
+		   
+		   String nombre = (String) modelo.getValueAt(i, 0);
+		   Object cantAnterior =    modelo.getValueAt(i, 2);
+		   
+		   if(nombre.equals(row[0])) {
+
+			   
+			   int valorInicial = (int)cantAnterior;
+			   int suma = valorInicial + (int)row[2];
+			   modelo.setValueAt(suma , i, 2);
+			   			   
+			   return true;
+			   
+		   }
+		   
+	   }
+	
+	   return false;
+}
+
+private boolean isNumero(String cantidad) {
+	
+	   try{
+	        Integer.parseInt(cantidad);
+	        return true;
+	    }catch(NumberFormatException e){
+	        return false;
+	    }
+	
+   }
+   
+   private double buscaPrecio(String nombre) {
+	   
+	   Iterator<Articulo> it = listaArt.iterator();
+	   double precio = 0.0;
+	   while(it.hasNext()) {
+		   
+		   Articulo art = it.next();
+		   String nom = art.getNombre();
+		   if(nom.equals(nombre)) {
+			   
+			   precio = art.getPrecio();
+			   return precio;
+		   }
+		   
+	   }
+	   return precio; 
+   }
+
+/**
     * @param args the command line arguments
     */
    public static void main(String args[]) {
@@ -407,7 +486,7 @@ private void JCombo_distribuidoresItemStateChanged(java.awt.event.ItemEvent evt)
 	   
 	   ServicioArticulos servicioArt = new ServicioArticulos();
 	   
-	   List<Articulo> listaArt = servicioArt.parseXMLtoList();
+	   listaArt = servicioArt.parseXMLtoList();
 	   Iterator<Articulo> it = listaArt.iterator();
 	   
 	   String[] articulos = new String[listaArt.size()+1];
@@ -461,5 +540,6 @@ private void JCombo_distribuidoresItemStateChanged(java.awt.event.ItemEvent evt)
    private DefaultTableModel modelo;
    private Object [][]filas;
    private Object [] columnas = {"NOMBRE", "PRECIO", "CANTIDAD", "OTROS"};
+   List<Articulo> listaArt;
    // End of variables declaration                   
 }
