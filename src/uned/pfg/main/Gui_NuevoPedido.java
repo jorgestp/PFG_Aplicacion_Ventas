@@ -2,7 +2,9 @@ package uned.pfg.main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,6 +17,10 @@ import uned.pfg.bean.Distribuidor;
 import uned.pfg.logica.ServicioArticulos;
 import uned.pfg.logica.ServicioArticulos_Pedido;
 import uned.pfg.logica.ServicioObtenerDistribuidor;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTextField;
 
 /**
 *
@@ -48,15 +54,7 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
        InfoCantidad = new javax.swing.JLabel();
        textCantidad = new javax.swing.JTextField();
        AnadirArticulo = new javax.swing.JButton();
-       jScrollPane2 = new javax.swing.JScrollPane();
-       idArticulo = new javax.swing.JTextPane();
        info_detallada_Art = new javax.swing.JLabel();
-       jScrollPane3 = new javax.swing.JScrollPane();
-       nombreArt = new javax.swing.JTextPane();
-       jScrollPane4 = new javax.swing.JScrollPane();
-       fechaArti = new javax.swing.JTextPane();
-       jScrollPane5 = new javax.swing.JScrollPane();
-       precioArt = new javax.swing.JTextPane();
        euro = new javax.swing.JLabel();
        infoID = new javax.swing.JLabel();
        infoNombre = new javax.swing.JLabel();
@@ -127,16 +125,8 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
            }
        });
 
-       jScrollPane2.setViewportView(idArticulo);
-
        info_detallada_Art.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
        info_detallada_Art.setText("INFORMACION DE ARTICULO");
-
-       jScrollPane3.setViewportView(nombreArt);
-
-       jScrollPane4.setViewportView(fechaArti);
-
-       jScrollPane5.setViewportView(precioArt);
 
        euro.setText("€");
 
@@ -147,85 +137,99 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
        infoFechaEntrada.setText("FECHA ENTRADA");
 
        infoprecioArt.setText("PRECIO");
+       
+       idArticulos = new JTextField();
+       idArticulos.setColumns(10);
+       
+       nombreArt = new JTextField();
+       nombreArt.setColumns(10);
+       
+       fecha_Ent = new JTextField();
+       fecha_Ent.setColumns(10);
+       
+       precioArt = new JTextField();
+       precioArt.setColumns(10);
 
        javax.swing.GroupLayout PanelArticulosLayout = new javax.swing.GroupLayout(PanelArticulos);
-       PanelArticulos.setLayout(PanelArticulosLayout);
        PanelArticulosLayout.setHorizontalGroup(
-           PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-           .addGroup(PanelArticulosLayout.createSequentialGroup()
-               .addGroup(PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                   .addGroup(PanelArticulosLayout.createSequentialGroup()
-                       .addContainerGap()
-                       .addGroup(PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                           .addGroup(PanelArticulosLayout.createSequentialGroup()
-                               .addComponent(AnadirArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                               .addGap(0, 8, Short.MAX_VALUE))
-                           .addGroup(PanelArticulosLayout.createSequentialGroup()
-                               .addGroup(PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                   .addComponent(InfoCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                                   .addComponent(InfoArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                               .addGroup(PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                   .addComponent(articuloSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                   .addComponent(textCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                   .addGroup(PanelArticulosLayout.createSequentialGroup()
-                       .addGroup(PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                           .addGroup(PanelArticulosLayout.createSequentialGroup()
-                               .addGap(49, 49, 49)
-                               .addComponent(info_detallada_Art, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                           .addGroup(PanelArticulosLayout.createSequentialGroup()
-                               .addContainerGap()
-                               .addGroup(PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                   .addComponent(infoID, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                   .addComponent(infoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                   .addComponent(infoFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                   .addComponent(infoprecioArt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                               .addGap(34, 34, 34)
-                               .addGroup(PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                   .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                   .addComponent(jScrollPane3)
-                                   .addComponent(jScrollPane4)
-                                   .addGroup(PanelArticulosLayout.createSequentialGroup()
-                                       .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                       .addComponent(euro, javax.swing.GroupLayout.DEFAULT_SIZE, 11, Short.MAX_VALUE)))))
-                       .addGap(0, 0, Short.MAX_VALUE)))
-               .addContainerGap())
+       	PanelArticulosLayout.createParallelGroup(Alignment.LEADING)
+       		.addGroup(PanelArticulosLayout.createSequentialGroup()
+       			.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.LEADING)
+       				.addGroup(PanelArticulosLayout.createSequentialGroup()
+       					.addContainerGap()
+       					.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.LEADING)
+       						.addGroup(PanelArticulosLayout.createSequentialGroup()
+       							.addComponent(AnadirArticulo, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE)
+       							.addGap(0, 8, Short.MAX_VALUE))
+       						.addGroup(PanelArticulosLayout.createSequentialGroup()
+       							.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.TRAILING, false)
+       								.addComponent(InfoCantidad, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+       								.addComponent(InfoArticulo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+       							.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+       							.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.LEADING)
+       								.addComponent(articuloSeleccionado, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
+       								.addComponent(textCantidad, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)))))
+       				.addGroup(PanelArticulosLayout.createSequentialGroup()
+       					.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.LEADING)
+       						.addGroup(PanelArticulosLayout.createSequentialGroup()
+       							.addGap(49)
+       							.addComponent(info_detallada_Art, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE))
+       						.addGroup(PanelArticulosLayout.createSequentialGroup()
+       							.addContainerGap()
+       							.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.LEADING)
+       								.addComponent(infoID, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+       								.addComponent(infoNombre, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+       								.addComponent(infoFechaEntrada, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+       								.addComponent(infoprecioArt, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
+       							.addGap(18)
+       							.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.LEADING)
+       								.addComponent(idArticulos, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+       								.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.LEADING)
+       									.addGroup(PanelArticulosLayout.createSequentialGroup()
+       										.addComponent(precioArt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+       										.addGap(12)
+       										.addComponent(euro, GroupLayout.DEFAULT_SIZE, 11, Short.MAX_VALUE))
+       									.addComponent(nombreArt, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
+       									.addComponent(fecha_Ent, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)))))
+       					.addGap(0, 21, 21)))
+       			.addContainerGap())
        );
        PanelArticulosLayout.setVerticalGroup(
-           PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-           .addGroup(PanelArticulosLayout.createSequentialGroup()
-               .addContainerGap()
-               .addGroup(PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                   .addComponent(InfoArticulo)
-                   .addComponent(articuloSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-               .addGap(18, 18, 18)
-               .addGroup(PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                   .addComponent(InfoCantidad)
-                   .addComponent(textCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-               .addGap(18, 18, 18)
-               .addComponent(AnadirArticulo)
-               .addGap(29, 29, 29)
-               .addComponent(info_detallada_Art, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-               .addGap(18, 18, 18)
-               .addGroup(PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                   .addComponent(infoID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                   .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
-               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-               .addGroup(PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                   .addComponent(infoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                   .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-               .addGroup(PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                   .addComponent(infoFechaEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                   .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-               .addGroup(PanelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                   .addComponent(euro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                   .addComponent(infoprecioArt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                   .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
-               .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+       	PanelArticulosLayout.createParallelGroup(Alignment.LEADING)
+       		.addGroup(PanelArticulosLayout.createSequentialGroup()
+       			.addContainerGap()
+       			.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.BASELINE)
+       				.addComponent(InfoArticulo)
+       				.addComponent(articuloSeleccionado, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+       			.addGap(18)
+       			.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.BASELINE)
+       				.addComponent(InfoCantidad)
+       				.addComponent(textCantidad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+       			.addGap(18)
+       			.addComponent(AnadirArticulo)
+       			.addGap(29)
+       			.addComponent(info_detallada_Art, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+       			.addGap(21)
+       			.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.TRAILING)
+       				.addComponent(infoID)
+       				.addComponent(idArticulos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+       			.addPreferredGap(ComponentPlacement.RELATED)
+       			.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.BASELINE)
+       				.addComponent(infoNombre)
+       				.addComponent(nombreArt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+       			.addPreferredGap(ComponentPlacement.RELATED)
+       			.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.BASELINE)
+       				.addComponent(infoFechaEntrada)
+       				.addComponent(fecha_Ent, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+       			.addPreferredGap(ComponentPlacement.RELATED)
+       			.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.LEADING, false)
+       				.addGroup(PanelArticulosLayout.createParallelGroup(Alignment.BASELINE)
+       					.addComponent(euro, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+       					.addComponent(precioArt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+       				.addComponent(infoprecioArt, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+       			.addContainerGap(19, Short.MAX_VALUE))
        );
+       PanelArticulos.setLayout(PanelArticulosLayout);
 
        infoCliente.setText("Seleccione un Cliente");
 
@@ -338,7 +342,29 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
                
 				 fila = Tabla.rowAtPoint(evt.getPoint());
 				
+				 buscaFecha_e_id(String.valueOf(Tabla.getValueAt(fila, 0)));
+				 idArticulos.setText(String.valueOf(id));
+				 nombreArt.setText(String.valueOf(Tabla.getValueAt(fila, 0)));
+				 fecha_Ent.setText(String.valueOf(new SimpleDateFormat("dd/MM/yyyy").format(fechaEntrad)));
+				 precioArt.setText(String.valueOf(Tabla.getValueAt(fila, 1)));
            }
+
+		private void buscaFecha_e_id(String valueOf) {
+			
+			Iterator<Articulo> it = listaArt.iterator();
+			
+			while(it.hasNext()) {
+				
+				Articulo a = it.next();
+				
+				if(a.getNombre().equals(valueOf)) {
+					
+					id = a.getId_articulo();
+					fechaEntrad = a.getFecha_entrada();
+				}
+			}
+			
+		}
        });
        
        botonEliminar.addActionListener(new ActionListener() {
@@ -349,10 +375,11 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 			if(fila == -1) {
 				   JOptionPane.showMessageDialog(null, "Seleccione un articulo de la "
 				   		+ "tabla para eliminar", "Ventas", 2);
-				
+				   numArticulos.setText(String.valueOf(modelo.getRowCount()));	
 			}else {
 				
 				modelo.removeRow(fila);
+				numArticulos.setText(String.valueOf(modelo.getRowCount()));
 			}
 			
 			
@@ -385,7 +412,8 @@ private void JCombo_distribuidoresItemStateChanged(java.awt.event.ItemEvent evt)
 		   		+ " o la cantidad no es un valor numerico..", "Ventas", 2);
 	   }else {
 		   
-		   Object [] row = {seleccion, buscaPrecio(seleccion), Integer.parseInt(cantidad)};
+		   double prec = buscaPrecio(seleccion);
+		   Object [] row = {seleccion, prec, Integer.parseInt(cantidad), (prec* Integer.parseInt(cantidad))};
 		   	  
 		   if(!isPedido(row)) {
 			   
@@ -411,6 +439,10 @@ private void JCombo_distribuidoresItemStateChanged(java.awt.event.ItemEvent evt)
 			   int valorInicial = (int)cantAnterior;
 			   int suma = valorInicial + (int)row[2];
 			   modelo.setValueAt(suma , i, 2);
+			   Object precioAct =    modelo.getValueAt(i, 1);
+			   double pre = (double) precioAct;
+			   double precioActualizado = suma * pre ;
+			   modelo.setValueAt(precioActualizado, i, 3);
 			   			   
 			   return true;
 			   
@@ -530,7 +562,6 @@ private boolean isNumero(String cantidad) {
 	   
 	   return articulos;
 }
-
    // Variables declaration - do not modify                     
    private javax.swing.JButton AnadirArticulo;
    private javax.swing.JLabel InfoArticulo;
@@ -544,9 +575,9 @@ private boolean isNumero(String cantidad) {
    private javax.swing.JComboBox<String> articuloSeleccionado;
    private javax.swing.JButton botonEliminar;
    private javax.swing.JLabel euro;
-   private javax.swing.JTextPane fechaArti;
+   
    private com.toedter.calendar.JDateChooser fechaEnvio;
-   private javax.swing.JTextPane idArticulo;
+   
    private javax.swing.JLabel infoCliente;
    private javax.swing.JLabel infoFechaEntrada;
    private javax.swing.JLabel infoID;
@@ -555,21 +586,21 @@ private boolean isNumero(String cantidad) {
    private javax.swing.JLabel info_detallada_Art;
    private javax.swing.JLabel infoprecioArt;
    private javax.swing.JScrollPane jScrollPane1;
-   private javax.swing.JScrollPane jScrollPane2;
-   private javax.swing.JScrollPane jScrollPane3;
-   private javax.swing.JScrollPane jScrollPane4;
-   private javax.swing.JScrollPane jScrollPane5;
-   private javax.swing.JTextPane nombreArt;
+  
    private javax.swing.JLabel numArticulos;
    private javax.swing.JButton pedido;
    private javax.swing.JLabel precio;
-   private javax.swing.JTextPane precioArt;
+  
    private javax.swing.JTextField textCantidad;
    private javax.swing.JLabel total;
    private DefaultTableModel modelo;
    private Object [][]filas;
-   private Object [] columnas = {"NOMBRE", "PRECIO", "CANTIDAD", "OTROS"};
+   private Object [] columnas = {"NOMBRE", "PRECIO", "CANTIDAD", "TOTAL (€)"};
    List<Articulo> listaArt;
-   int fila;
-   // End of variables declaration                   
+   int fila, id;
+   Date fechaEntrad;
+   private JTextField idArticulos;
+   private JTextField nombreArt;
+   private JTextField fecha_Ent;
+   private JTextField precioArt;
 }
