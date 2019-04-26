@@ -2,7 +2,7 @@ package uned.pfg.main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +20,8 @@ import uned.pfg.bean.Pedido;
 import uned.pfg.logica.ServicioArticulos;
 import uned.pfg.logica.ServicioArticulos_Pedido;
 import uned.pfg.logica.ServicioObtenerDistribuidor;
+import uned.pfg.logica.ServicioPedido;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -32,6 +34,10 @@ import javax.swing.JTextField;
 public class Gui_NuevoPedido extends javax.swing.JFrame {
 
    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+/**
     * Creates new form Gui_NuevoPedido
     */
    public Gui_NuevoPedido() {
@@ -408,10 +414,26 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 
 				List<ArticuloPedido> list = obtenerListaArticulos();
 				
-				Pedido pedido = new Pedido(obtenerIdDistribuidor(
-						JCombo_distribuidores.getSelectedItem().toString()),
-						f_actual, fe_env, "En trámite",list);
+				//Pedido pedido = new Pedido(obtenerIdDistribuidor(
+				//		JCombo_distribuidores.getSelectedItem().toString()),
+				//		f_actual, fe_env, "En tramite");
+				Pedido pedido = new Pedido(
+						obtenerIdDistribuidor(JCombo_distribuidores.getSelectedItem().toString())
+						, f_actual, fe_env, "En tramite", list);
 				
+				ServicioPedido servicioPedido = new ServicioPedido(pedido);
+				
+				String p = servicioPedido.prepararPedido_paraServidor();
+				
+				ServicioArticulos_Pedido ser_Art_ped = new ServicioArticulos_Pedido();
+				
+				
+				String a = ser_Art_ped.crearXML_Articulos(list);
+				
+				System.out.println(p);
+				System.out.println();
+				System.out.println();
+				System.out.println(a);
 				
 			}
 			
