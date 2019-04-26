@@ -424,16 +424,24 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 				
 				ServicioPedido servicioPedido = new ServicioPedido(pedido);
 				
-				String p = servicioPedido.prepararPedido_paraServidor();
+				String ped = servicioPedido.prepararPedido_paraServidor();
 				
 				ServicioArticulos_Pedido ser_Art_ped = new ServicioArticulos_Pedido();
 				
 				
-				String a = ser_Art_ped.crearXML_Articulos(list);
+				String art = ser_Art_ped.crearXML_Articulos(list);
 				
-				ServicioEnvioPedido s = new ServicioEnvioPedido(p, a);
+				ServicioEnvioPedido s = new ServicioEnvioPedido(ped, art);
 				
-				s.sendPedido();
+				String respuesta = s.sendPedido();
+				
+				if(respuesta.equalsIgnoreCase("exito")) {
+					
+					   JOptionPane.showMessageDialog(null, "PEDIDO REGISTRADO CORRECTAMENTE", "Ventas", 2);
+				}else {
+					
+					JOptionPane.showMessageDialog(null, "Ups...no se ha podido ingresar el pedido", "Ventas", 3);
+				}
 			}
 			
 		}

@@ -18,15 +18,17 @@ public class ServicioEnvioPedido {
 	}
 	
 	
-	public void sendPedido() {
+	public String sendPedido() {
 
+		String respuesta = "error";
 		WS_ObtenerPedido ws = new WS_ObtenerPedidoProxy("http://localhost:8080/Aplicacion_Web/services/WS_ObtenerPedido");
 	
 		try {
-			System.out.println(ws.envioPedido("JORGE", "VILLALBA"));
+			 respuesta = ws.envioPedido(pedido, articulo);
+			 return respuesta;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
-			System.out.println("NO SE PUDO CONECTAR CON EL SERVIDOR");
+			return respuesta;
 		}
 		
 	}
