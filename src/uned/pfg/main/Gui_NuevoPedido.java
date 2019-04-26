@@ -19,6 +19,7 @@ import uned.pfg.bean.Distribuidor;
 import uned.pfg.bean.Pedido;
 import uned.pfg.logica.ServicioArticulos;
 import uned.pfg.logica.ServicioArticulos_Pedido;
+import uned.pfg.logica.ServicioEnvioPedido;
 import uned.pfg.logica.ServicioObtenerDistribuidor;
 import uned.pfg.logica.ServicioPedido;
 
@@ -430,11 +431,9 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 				
 				String a = ser_Art_ped.crearXML_Articulos(list);
 				
-				System.out.println(p);
-				System.out.println();
-				System.out.println();
-				System.out.println(a);
+				ServicioEnvioPedido s = new ServicioEnvioPedido(p, a);
 				
+				s.sendPedido();
 			}
 			
 		}
