@@ -2,6 +2,7 @@ package uned.pfg.main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +14,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import uned.pfg.bean.Articulo;
+import uned.pfg.bean.ArticuloPedido;
 import uned.pfg.bean.Distribuidor;
+import uned.pfg.bean.Pedido;
 import uned.pfg.logica.ServicioArticulos;
 import uned.pfg.logica.ServicioArticulos_Pedido;
 import uned.pfg.logica.ServicioObtenerDistribuidor;
@@ -385,6 +388,91 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 			
 		}
 	});
+       
+       pedido.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			String distribuidor = JCombo_distribuidores.getSelectedItem().toString();
+			Date fe_env = fechaEnvio.getDate();
+			if(distribuidor.equalsIgnoreCase("Selec. Distribuidor") || fe_env == null) {
+				
+				   JOptionPane.showMessageDialog(null, "Seleccione un distribuidor para "
+				   		+ "asignarle el pedido y una fecha valida", "Ventas", 2);
+				
+			}else {
+				
+				
+				Date f_actual = new Date();
+
+				List<ArticuloPedido> list = obtenerListaArticulos();
+				
+				Pedido pedido = new Pedido(obtenerIdDistribuidor(
+						JCombo_distribuidores.getSelectedItem().toString()),
+						f_actual, fe_env, "En trámite",list);
+				
+				
+			}
+			
+		}
+		
+		private int obtenerIdDistribuidor(String nombre) {
+			
+			Iterator<Distribuidor> it = listaDis.iterator();
+			
+			while(it.hasNext()) {
+				
+				Distribuidor d = it.next();
+				
+				if(d.getNombre().equals(nombre)) {
+					
+					return d.getId();
+				}
+			}
+			
+			return -1;
+		}
+		
+		
+
+		private List<ArticuloPedido> obtenerListaArticulos() {
+			
+			List<ArticuloPedido> list = new ArrayList<ArticuloPedido>();
+			
+
+			
+			for(int i = 0; i< modelo.getRowCount(); i++) {
+				
+				Articulo art = buscaArticulo( (String) modelo.getValueAt(i, 0));
+				
+				Object obj = modelo.getValueAt(i, 2);
+				int cant = (int) obj;
+				ArticuloPedido artP = new ArticuloPedido(art, cant, false, false);
+				
+				list.add(artP);
+			}
+			
+			return list;
+		}
+
+		private Articulo buscaArticulo(String valueAt) {
+			
+			Iterator<Articulo> it = listaArt.iterator();
+			
+			while(it.hasNext()) {
+				
+				Articulo articulo = it.next();
+				
+				if(articulo.getNombre().equals(valueAt)) {
+					
+					return articulo;
+				}
+			}
+			
+			return null;
+		}
+	});
    }// </editor-fold>                        
 
 
@@ -521,7 +609,7 @@ private boolean isNumero(String cantidad) {
    private String[] Distribuidores() {
 	   
 	   ServicioObtenerDistribuidor servicio = new ServicioObtenerDistribuidor();
-	   List<Distribuidor> listaDis = servicio.parseXMLtoList();
+	   listaDis = servicio.parseXMLtoList();
 	   
 	   String[] distribuidores = new String[listaDis.size()+1];
 	   
@@ -603,4 +691,5 @@ private boolean isNumero(String cantidad) {
    private JTextField nombreArt;
    private JTextField fecha_Ent;
    private JTextField precioArt;
+   List<Distribuidor> listaDis;
 }
