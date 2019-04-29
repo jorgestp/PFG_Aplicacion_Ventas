@@ -86,10 +86,7 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
        
        modelo = new DefaultTableModel(filas, columnas);
        Tabla.setModel(modelo);
-       
-       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-       
+ 
        jScrollPane1.setViewportView(Tabla);
 
        botonEliminar.setText("Eliminar Articulo");

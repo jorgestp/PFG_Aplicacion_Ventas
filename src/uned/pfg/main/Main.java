@@ -4,7 +4,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		new Gui_Principal().setVisible(true);
+		new Ventas().setVisible(true);
 	}
 
 }
