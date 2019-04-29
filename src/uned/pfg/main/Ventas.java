@@ -243,7 +243,9 @@ public class Ventas extends javax.swing.JFrame {
 
     private void borrarActionPerformed(java.awt.event.ActionEvent evt) {                                       
         
-    	
+    	fecha.setCalendar(null);
+    	nombreArt.setText(null);
+    	precio.setText(null);
     	
     }                                      
 
