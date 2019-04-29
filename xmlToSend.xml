@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><pedidos><pedido><id_distribuidor>10</id_distribuidor><fecha_pedido>2019-04-28</fecha_pedido><fecha_envio>2019-04-30</fecha_envio><estado>En tramite</estado></pedido></pedidos>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><pedidos><pedido><id_distribuidor>10</id_distribuidor><fecha_pedido>2019-04-30</fecha_pedido><fecha_envio>2019-05-01</fecha_envio><estado>En tramite</estado></pedido></pedidos>

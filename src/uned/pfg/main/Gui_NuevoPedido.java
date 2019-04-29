@@ -556,7 +556,7 @@ private void JCombo_distribuidoresItemStateChanged(java.awt.event.ItemEvent evt)
 			   Object precioAct =    modelo.getValueAt(i, 1);
 			   double pre = (double) precioAct;
 			   double precioActualizado = suma * pre ;
-			   modelo.setValueAt(precioActualizado, i, 3);
+			   modelo.setValueAt(String.format("%.2f", precioActualizado), i, 3);
 			   			   
 			   return true;
 			   

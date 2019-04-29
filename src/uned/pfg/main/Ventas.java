@@ -1,13 +1,17 @@
 package uned.pfg.main;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import uned.pfg.bean.Articulo;
 import uned.pfg.bean.Distribuidor;
 import uned.pfg.logica.ServicioEliminarDistribuidor;
+import uned.pfg.logica.ServicioNuevoArticulo;
 import uned.pfg.logica.ServicioObtenerDistribuidor;
 
 /*
@@ -224,9 +228,76 @@ public class Ventas extends javax.swing.JFrame {
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {                                       
         
+    	
+    	
+    	String nombre = nombreArt.getText();
+    	Date fecha_recogida = fecha.getDate();
+    	Date fecha_actual = new Date();
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    	String pre = precio.getText();
+    	
+    	
+    	
+    	
+    	
+    	if(nombre ==null ||
+    			fecha_recogida == null ||
+    			pre == null) {
+    		
+    		JOptionPane.showMessageDialog(null, "No puede haber campos vacios por favor...", "Ventas", 2);
+    		
+    		
+    	}else {
+    		
+    		int comparacion = sdf.format(fecha_recogida).compareTo(sdf.format(fecha_actual));
+    		
+    		if(!isDouble(pre)) {
+    			
+    			JOptionPane.showMessageDialog(null, "El precio introducido no es numerio o decimal...(X.X)",
+    					"Ventas", 2);
+    			
+    		}else {
+    			
+    			if(comparacion<0) {
+    				
+        			JOptionPane.showMessageDialog(null, "La fecha es anterior a la actual...revisela por favor",
+        					"Ventas", 2);
+    			}else{
+    				
+    				
+    				Articulo art = new Articulo (nombre, fecha_recogida, Double.parseDouble(pre));
+    				
+    				if(new ServicioNuevoArticulo(art).servicio().equals("exito")) {
+    					
+            			JOptionPane.showMessageDialog(null, "ARTICULO GUARDADO CORRECTAMENTE",
+            					"Ventas", 3);
+            	    	nombreArt.setText(null);
+            	    	 fecha.setCalendar(null);
+            	    	precio.setText(null);
+    				}else {
+    					
+            			JOptionPane.showMessageDialog(null, "Ups..problemas con conexion al servidor",
+            					"Ventas", 2);
+    				}
+    			}
+    			
+    		}
+    		
+    	}
+    	
+    	
     }                                      
 
-    private void nuevoPedidoActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private boolean isDouble(String pre) {
+ 	   try{
+	        Double.parseDouble(pre);
+	        return true;
+	    }catch(NumberFormatException e){
+	        return false;
+	    }
+	}
+
+	private void nuevoPedidoActionPerformed(java.awt.event.ActionEvent evt) {                                            
         
     	Gui_NuevoPedido nuevopedido = new Gui_NuevoPedido();
     	nuevopedido.setVisible(true);

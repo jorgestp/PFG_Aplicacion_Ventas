@@ -29,6 +29,12 @@ public class Articulo {
 
 
 
+	public Articulo(String nombre, Date fecha_entrada, double precio) {
+		this.nombre = nombre;
+		this.fecha_entrada = fecha_entrada;
+		this.precio = precio;
+	}
+
 	public int getId_articulo() {
 		return id_articulo;
 	}
