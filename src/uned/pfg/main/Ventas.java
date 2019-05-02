@@ -309,7 +309,9 @@ public class Ventas extends javax.swing.JFrame {
     }                                               
 
     private void stockActionPerformed(java.awt.event.ActionEvent evt) {                                      
-        // TODO add your handling code here:
+        
+    	new Gui_Almacen().setVisible(true);
+    	
     }                                     
 
     private void borrarActionPerformed(java.awt.event.ActionEvent evt) {                                       

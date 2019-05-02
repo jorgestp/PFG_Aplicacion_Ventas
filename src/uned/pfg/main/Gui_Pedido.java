@@ -221,7 +221,7 @@ public class Gui_Pedido extends javax.swing.JFrame {
 		modelo2.setNumRows(0);
 		ServicioArticulos_Pedido serv = new ServicioArticulos_Pedido(idPedido.getText());
 		
-		System.out.println("CANTIDAD DE ARTICULOS => " + serv.parseXMLtoList().size());
+		//System.out.println("CANTIDAD DE ARTICULOS => " + serv.parseXMLtoList().size());
 		
 		Iterator<ArticuloPedido> it = serv.parseXMLtoList().iterator();
 		

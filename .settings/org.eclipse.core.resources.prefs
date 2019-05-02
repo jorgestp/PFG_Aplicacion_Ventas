@@ -1,4 +1,12 @@
 eclipse.preferences.version=1
+encoding//src/uned/pfg/ws/WS_Almacen.java=UTF-8
+encoding//src/uned/pfg/ws/WS_AlmacenService.java=UTF-8
+encoding//src/uned/pfg/ws/WS_AlmacenServiceLocator.java=UTF-8
+encoding//src/uned/pfg/ws/WS_AlmacenSoapBindingStub.java=UTF-8
+encoding//src/uned/pfg/ws/WS_ArtSeleccionado.java=UTF-8
+encoding//src/uned/pfg/ws/WS_ArtSeleccionadoService.java=UTF-8
+encoding//src/uned/pfg/ws/WS_ArtSeleccionadoServiceLocator.java=UTF-8
+encoding//src/uned/pfg/ws/WS_ArtSeleccionadoSoapBindingStub.java=UTF-8
 encoding//src/uned/pfg/ws/WS_Articulo.java=UTF-8
 encoding//src/uned/pfg/ws/WS_ArticuloService.java=UTF-8
 encoding//src/uned/pfg/ws/WS_ArticuloServiceLocator.java=UTF-8
