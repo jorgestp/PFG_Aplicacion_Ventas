@@ -65,6 +65,7 @@ public class Ventas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("VENTAS ");
 
+        fecha.setDateFormatString("dd/MM/yyyy");
         infoNombreArt.setText("NOMBRE DEL ARTÍCULO");
 
         infoFecha.setText("FECHA DE ENTRADA");
