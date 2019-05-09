@@ -2,7 +2,6 @@ package uned.pfg.main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -387,6 +386,7 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 				
 				modelo.removeRow(fila);
 				numArticulos.setText(String.valueOf(modelo.getRowCount()));
+				precio.setText(String.valueOf(String.format("%.2f", calcularPrecioFinal())));
 			}
 			
 			
@@ -527,7 +527,8 @@ private void JCombo_distribuidoresItemStateChanged(java.awt.event.ItemEvent evt)
 	   }else {
 		   
 		   double prec = buscaPrecio(seleccion);
-		   Object [] row = {seleccion, prec, Integer.parseInt(cantidad), (prec* Integer.parseInt(cantidad))};
+		   double total = prec* Integer.parseInt(cantidad);
+		   Object [] row = {seleccion, prec, Integer.parseInt(cantidad), total};
 		   	  
 		   if(!isPedido(row)) {
 			   
@@ -537,10 +538,27 @@ private void JCombo_distribuidoresItemStateChanged(java.awt.event.ItemEvent evt)
 	   }//fin else
 	   
 	   textCantidad.setText("");
+	   articuloSeleccionado.setSelectedIndex(0);
+	   precio.setText(String.valueOf(String.format("%.2f", calcularPrecioFinal())));
 	   
    } //fin metodo                                            
 
-   private boolean isPedido(Object[] row ) {
+   private double calcularPrecioFinal() {
+	
+	   double suma = 0;
+	   double cantidad = 0;
+	   for(int i=0; i< Tabla.getRowCount();i++) {
+		   
+		   cantidad = Double.parseDouble(Tabla.getValueAt(i	, 3).toString());
+		   suma += cantidad;
+		   
+	   }
+	   
+	   
+	return suma;
+}
+
+private boolean isPedido(Object[] row ) {
 	
 	   for(int i=0; i< modelo.getRowCount();i++) {
 		   
@@ -556,7 +574,7 @@ private void JCombo_distribuidoresItemStateChanged(java.awt.event.ItemEvent evt)
 			   Object precioAct =    modelo.getValueAt(i, 1);
 			   double pre = (double) precioAct;
 			   double precioActualizado = suma * pre ;
-			   modelo.setValueAt(String.format("%.2f", precioActualizado), i, 3);
+			   modelo.setValueAt(precioActualizado, i, 3);
 			   			   
 			   return true;
 			   
