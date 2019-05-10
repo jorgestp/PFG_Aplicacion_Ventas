@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
 
-
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import uned.pfg.bean.ArticuloPedido;
@@ -44,12 +44,13 @@ public class Gui_Pedido extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaArticulo = new javax.swing.JTable();
+        entero = -1;
 
         modelo = new DefaultTableModel(filas, columnas);
         tablaPedido.setModel(modelo);
         jScrollPane1.setViewportView(tablaPedido);
         
-        contruirTabla();
+       
         
         modelo2 = new DefaultTableModel(filas2, columnas2);
         TablaArticulo.setModel(modelo2);
@@ -148,7 +149,7 @@ public class Gui_Pedido extends javax.swing.JFrame {
         tablaPedido.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 
-				int entero = tablaPedido.rowAtPoint(evt.getPoint());
+				 entero = tablaPedido.rowAtPoint(evt.getPoint());
 				idPedido.setText(String.valueOf(tablaPedido.getValueAt(entero, 0)));
             }
         });
@@ -156,9 +157,21 @@ public class Gui_Pedido extends javax.swing.JFrame {
         verPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                
-            	rellenarTablaArticulos();
+            	
+            	if(entero != -1) rellenarTablaArticulos();
+            	else {
+            		
+            		JOptionPane.showMessageDialog(null,
+            				"Error; no ha seleccionado ningun pedido para visualizar."
+            				+ " Seleccione uno de ellos para poder ver su contenido", 
+            				"Ventas - Pedidos",
+            				2);
+            	}
+            	
             }
         });
+        
+        contruirTabla();
     }// </editor-fold>                        
 
                                          
@@ -200,7 +213,8 @@ public class Gui_Pedido extends javax.swing.JFrame {
 		
 		List<Pedido> list = service.parseXMLtoList();
 		
-		//System.out.println(list.size());
+		if(!list.isEmpty()) {
+		
 		
 		Iterator<Pedido> it = list.iterator();
 		
@@ -213,6 +227,15 @@ public class Gui_Pedido extends javax.swing.JFrame {
             		formatter.format(p.getFecha_envio()), p.getEstado()};
             
             modelo.addRow(row);
+		}
+		
+		}else {
+			
+    		JOptionPane.showMessageDialog(null,
+    				"NO HAY NINGUN PEDIDO EN EL SISTEMA", 
+    				"Ventas - Pedidos",
+    				2);
+			
 		}
 	}
 	
@@ -259,6 +282,7 @@ public class Gui_Pedido extends javax.swing.JFrame {
     private Object [] columnas2 = {"ID_ARTICULO", "NOMBRE","PRECIO/unidad","CANTIDAD", "REALIZADO", "EMBALADO"};
     private DefaultTableModel modelo;
     private Object [][]filas;
+    int entero;
     private Object [] columnas = {"ID PEDIDO", "DISTRIBUIDOR","FECHA REALIZACION","FECHA ENVIO", "ESTADO"};
     // End of variables declaration                   
 }
