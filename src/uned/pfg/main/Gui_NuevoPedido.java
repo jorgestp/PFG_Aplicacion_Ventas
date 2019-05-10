@@ -82,6 +82,7 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
        modelo = new DefaultTableModel();
        listaArt = new ArrayList<Articulo>();
        fila =-1;
+       list_añadido = new ArrayList<ArticuloPedido>();
        
        modelo = new DefaultTableModel(filas, columnas);
        Tabla.setModel(modelo);
@@ -116,11 +117,7 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
        InfoArticulo.setText("Seleccione articulo");
 
        articuloSeleccionado.setModel(new DefaultComboBoxModel<String>(Articulos()));
-       articuloSeleccionado.addItemListener(new java.awt.event.ItemListener() {
-           public void itemStateChanged(java.awt.event.ItemEvent evt) {
-               articuloSeleccionadoItemStateChanged(evt);
-           }
-       });
+
 
        InfoCantidad.setText("Seleccione Cantidad");
 
@@ -240,11 +237,6 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
        infoCliente.setText("Seleccione un Cliente");
 
        JCombo_distribuidores.setModel(new javax.swing.DefaultComboBoxModel<>(Distribuidores()));
-       JCombo_distribuidores.addItemListener(new java.awt.event.ItemListener() {
-           public void itemStateChanged(java.awt.event.ItemEvent evt) {
-               JCombo_distribuidoresItemStateChanged(evt);
-           }
-       });
 
        fechaEnvio.setDateFormatString("dd/MM/yyyy");
 
@@ -410,35 +402,66 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 				
 				Date f_actual = new Date();
 
-				List<ArticuloPedido> list = obtenerListaArticulos();
+ 
+					List<ArticuloPedido> list = obtenerListaArticulos();
+
 				
-				//Pedido pedido = new Pedido(obtenerIdDistribuidor(
-				//		JCombo_distribuidores.getSelectedItem().toString()),
-				//		f_actual, fe_env, "En tramite");
-				Pedido pedido = new Pedido(
-						obtenerIdDistribuidor(JCombo_distribuidores.getSelectedItem().toString())
-						, f_actual, fe_env, "En tramite", list);
-				
-				ServicioPedido servicioPedido = new ServicioPedido(pedido);
-				
-				String ped = servicioPedido.prepararPedido_paraServidor();
-				
-				ServicioArticulos_Pedido ser_Art_ped = new ServicioArticulos_Pedido();
-				
-				
-				String art = ser_Art_ped.crearXML_Articulos(list);
-				
-				ServicioEnvioPedido s = new ServicioEnvioPedido(ped, art);
-				
-				String respuesta = s.sendPedido();
-				
-				if(respuesta.equalsIgnoreCase("exito")) {
+				if(list.isEmpty()) {
 					
-					   JOptionPane.showMessageDialog(null, "PEDIDO REGISTRADO CORRECTAMENTE", "Ventas", 2);
+					   JOptionPane.showMessageDialog(null, "NO HAY ARTICULOS EN EL PEDIDO...", "Ventas", 3);
+
+					
 				}else {
 					
-					JOptionPane.showMessageDialog(null, "Ups...no se ha podido ingresar el pedido", "Ventas", 3);
+					Pedido pedido = new Pedido(
+							obtenerIdDistribuidor(JCombo_distribuidores.getSelectedItem().toString())
+							, f_actual, fe_env, "En tramite", list);
+					
+					ServicioPedido servicioPedido = new ServicioPedido(pedido);
+					
+					String ped = servicioPedido.prepararPedido_paraServidor();
+					
+					ServicioArticulos_Pedido ser_Art_ped = new ServicioArticulos_Pedido();
+					
+					
+					int opcion = JOptionPane.showConfirmDialog(null,
+							"¿Está seguro dar de alta a un nuevo pedido para el distribuidor " +
+									JCombo_distribuidores.getSelectedItem().toString() + " ?",
+							"Ventas- Nuevo Pedido",
+							1);
+					if(JOptionPane.OK_OPTION == opcion) {
+						
+						String art = ser_Art_ped.crearXML_Articulos(list_añadido);
+						
+						ServicioEnvioPedido s = new ServicioEnvioPedido(ped, art);
+						
+						String respuesta = s.sendPedido();
+						
+						if(respuesta.equalsIgnoreCase("exito")) {
+							
+							   JOptionPane.showMessageDialog(null, "PEDIDO REGISTRADO CORRECTAMENTE", "Ventas", 2);
+							   
+							   list_añadido.clear();
+							   modelo.setRowCount(0);
+							   JCombo_distribuidores.setSelectedIndex(0);
+							   fechaEnvio.setDate(null);
+							   numArticulos.setText("0");
+							   precio.setText("0");
+							   
+						}else {
+							
+							JOptionPane.showMessageDialog(null, "Ups...no se ha podido ingresar el pedido", "Ventas", 3);
+						}
+						
+						
+					}else {
+						
+						   JOptionPane.showMessageDialog(null, "De acuerdo, no se introduce el pedido", "Ventas", 2);
+
+					}			
 				}
+
+
 			}
 			
 		}
@@ -464,7 +487,7 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 
 		private List<ArticuloPedido> obtenerListaArticulos() {
 			
-			List<ArticuloPedido> list = new ArrayList<ArticuloPedido>();
+			
 			
 
 			
@@ -476,10 +499,10 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 				int cant = (int) obj;
 				ArticuloPedido artP = new ArticuloPedido(art, cant, false, false);
 				
-				list.add(artP);
+				list_añadido.add(artP);
 			}
 			
-			return list;
+			return list_añadido;
 		}
 
 		private Articulo buscaArticulo(String valueAt) {
@@ -503,13 +526,7 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 
 
 
-private void JCombo_distribuidoresItemStateChanged(java.awt.event.ItemEvent evt) {                                                       
-       // TODO add your handling code here:
-   }                                                      
-
-   private void articuloSeleccionadoItemStateChanged(java.awt.event.ItemEvent evt) {                                                      
-       // TODO add your handling code here:
-   }                                                     
+                                                  
 
    private void AnadirArticuloActionPerformed(java.awt.event.ActionEvent evt) {                                               
        
@@ -736,4 +753,5 @@ private boolean isNumero(String cantidad) {
    private JTextField fecha_Ent;
    private JTextField precioArt;
    List<Distribuidor> listaDis;
+   List<ArticuloPedido> list_añadido;
 }

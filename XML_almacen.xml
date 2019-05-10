@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Almacen_empresa/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Almacen_empresa><almacen><id_articulo>1</id_articulo><cantidad_almacenada>2000</cantidad_almacenada><cantidad_libre>1950</cantidad_libre></almacen></Almacen_empresa>
