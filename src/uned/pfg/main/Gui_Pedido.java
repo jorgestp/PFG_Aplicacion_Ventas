@@ -254,14 +254,61 @@ public class Gui_Pedido extends javax.swing.JFrame {
 			
 			ArticuloPedido p = it.next();
 			
-            Object [] row = {p.getArticulo().getId_articulo(),
-            				p.getArticulo().getNombre(),
-            				p.getArticulo().getPrecio(),
-            				p.getCant(),
-            				p.isRealizado(),
-            				p.isEmbalado()};
-            
-            modelo2.addRow(row);
+			if(p.isRealizado() && p.isEmbalado()) {
+				
+	            Object [] row = {p.getArticulo().getId_articulo(),
+        				p.getArticulo().getNombre(),
+        				p.getArticulo().getPrecio(),
+        				p.getCant(),
+        				"SI",
+        				"SI"};
+        
+	            modelo2.addRow(row);
+				
+			}else
+			
+			if(p.isRealizado() && !p.isEmbalado()) {
+				
+	            Object [] row = {p.getArticulo().getId_articulo(),
+        				p.getArticulo().getNombre(),
+        				p.getArticulo().getPrecio(),
+        				p.getCant(),
+        				"SI",
+        				"NO"};
+        
+	            modelo2.addRow(row);
+				
+				
+			}else
+			
+			if(!p.isRealizado() && p.isEmbalado()) {
+				
+	            Object [] row = {p.getArticulo().getId_articulo(),
+        				p.getArticulo().getNombre(),
+        				p.getArticulo().getPrecio(),
+        				p.getCant(),
+        				"NO",
+        				"SI"};
+        
+	            modelo2.addRow(row);
+				
+			}
+			
+			else {
+				
+				
+	            Object [] row = {p.getArticulo().getId_articulo(),
+        				p.getArticulo().getNombre(),
+        				p.getArticulo().getPrecio(),
+        				p.getCant(),
+        				"NO",
+        				"NO"};
+        
+	            modelo2.addRow(row);
+				
+			}
+			
+
 		}
 		
 	}
