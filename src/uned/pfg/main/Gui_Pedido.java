@@ -218,7 +218,7 @@ public class Gui_Pedido extends javax.swing.JFrame {
 		
 		Iterator<Pedido> it = list.iterator();
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
 		while(it.hasNext()) {
 			
 			Pedido p = it.next();

@@ -1,5 +1,6 @@
 package uned.pfg.logica;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -20,8 +21,7 @@ import uned.pfg.ws.WS_ArtSeleccionado;
 import uned.pfg.ws.WS_ArtSeleccionadoProxy;
 import uned.pfg.ws.WS_Articulo;
 import uned.pfg.ws.WS_ArticuloProxy;
-import uned.pfg.ws.WS_Distribuidor;
-import uned.pfg.ws.WS_DistribuidorProxy;
+
 
 public class ServicioArticulos {
 
@@ -134,6 +134,8 @@ public class ServicioArticulos {
 	   ex.printStackTrace();
 	} 
 	       
+			File archivo = new File(ARCHIVO);
+			archivo.delete();
 	       return lista;
 	   }
 	   
@@ -199,7 +201,8 @@ public class ServicioArticulos {
 	   
 	   ex.printStackTrace();
 	} 
-	       
+			File archivo = new File(ARCHIVO_artSelec);
+			archivo.delete();
 	       return art;
 	   }
 }

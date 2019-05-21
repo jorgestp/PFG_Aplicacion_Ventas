@@ -1,6 +1,7 @@
 package uned.pfg.logica;
 
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -99,6 +100,8 @@ public class ServicioAlmacen {
 			ex.printStackTrace();
 		}
 
+		File archivo = new File(ARCHIVO);
+		archivo.delete();
 		return lista;
 	}
 }

@@ -102,6 +102,7 @@ public class ServicioNuevoArticulo {
 
 			}
 
+			ar.delete();
 		} catch (IOException | ParserConfigurationException | TransformerException | DOMException e) {
 
 			e.printStackTrace();

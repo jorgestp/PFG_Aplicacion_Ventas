@@ -415,7 +415,7 @@ public class Gui_NuevoPedido extends javax.swing.JFrame {
 					
 					Pedido pedido = new Pedido(
 							obtenerIdDistribuidor(JCombo_distribuidores.getSelectedItem().toString())
-							, f_actual, fe_env, "En tramite", list);
+							, f_actual, fe_env, "En Tramite", list);
 					
 					ServicioPedido servicioPedido = new ServicioPedido(pedido);
 					

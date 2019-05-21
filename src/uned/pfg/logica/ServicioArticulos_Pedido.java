@@ -139,7 +139,8 @@ public class ServicioArticulos_Pedido {
 	    
 	    ex.printStackTrace();
 	} 
-	        
+			File archivo = new File(ARCHIVO);
+			archivo.delete();
 	        return lista;
 	    }
 	
@@ -202,8 +203,8 @@ public class ServicioArticulos_Pedido {
 	                  s= s + line +"\n";
 	                  
 	              } 
-	              
-	              System.out.println(ar.getAbsolutePath());
+	              ar.delete();
+	              //System.out.println(ar.getAbsolutePath());
 	              
 	          }catch( IOException | ParserConfigurationException | TransformerException | DOMException e){
 	              
