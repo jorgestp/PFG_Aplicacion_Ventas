@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -43,7 +44,10 @@ public class ServicioAlmacen {
 			p.close();
 		} catch (Exception e) {
 
-			e.printStackTrace();
+			//e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se puede "
+					+ "obtener el stock del almacen  de la base de datos."
+					+ " Compruebe su funcionamiento", "Ventas", 2);
 		}
 		
 	}
@@ -97,7 +101,7 @@ public class ServicioAlmacen {
 
 		} catch (Exception ex) {
 
-			ex.printStackTrace();
+			//ex.printStackTrace();
 		}
 
 		File archivo = new File(ARCHIVO);

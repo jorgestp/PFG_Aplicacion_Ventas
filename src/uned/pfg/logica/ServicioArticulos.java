@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -53,7 +54,11 @@ public class ServicioArticulos {
 		            p.close();
 		        }catch(Exception e){
 		            
-		            e.printStackTrace();
+		            //e.printStackTrace();
+		        	
+					JOptionPane.showMessageDialog(null, "No se puede "
+							+ "obtener los articulos de la base de datos."
+							+ " Compruebe su funcionamiento", "Ventas", 2);
 		        }
 	}
 	
@@ -131,7 +136,11 @@ public class ServicioArticulos {
 
 	} catch (Exception ex) {
 	   
-	   ex.printStackTrace();
+	   //ex.printStackTrace();
+		JOptionPane.showMessageDialog(null, "El sistema no tiene ningun articulo"
+				+ " disponible. Por favor, compruebe que esto sea cierto o "
+				+ " compruebe la conexion con la BBDD", "Ventas", 2);
+		
 	} 
 	       
 			File archivo = new File(ARCHIVO);

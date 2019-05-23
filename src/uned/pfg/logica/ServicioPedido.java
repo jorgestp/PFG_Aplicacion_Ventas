@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -56,7 +57,9 @@ public class ServicioPedido {
 			p.close();
 		} catch (Exception e) {
 
-			e.printStackTrace();
+			//e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se puede obtener los Pedidos del sistema..."
+					+ " Compruebe su funcionamiento del servidor y la BBDD", "Ventas", 2);
 		}
 	}
 
@@ -111,7 +114,7 @@ public class ServicioPedido {
 
 		} catch (Exception ex) {
 
-			ex.printStackTrace();
+			//ex.printStackTrace();
 		}
 
 		File archivo = new File(ARCHIVO);

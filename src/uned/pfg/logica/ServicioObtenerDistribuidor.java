@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -40,7 +41,10 @@ public class ServicioObtenerDistribuidor {
 			p.close();
 		} catch (Exception e) {
 
-			e.printStackTrace();
+			//e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se puedo establecer "
+					+ "conexion con el servidor. Comprueba que este está funcionando"
+					+ " junto a la Base de Datos del sistema... ", "Ventas", 2);
 		}
 	}
 
@@ -91,7 +95,10 @@ public class ServicioObtenerDistribuidor {
 
 		} catch (Exception ex) {
 
-			ex.printStackTrace();
+			//ex.printStackTrace();
+			/*JOptionPane.showMessageDialog(null, "No se puedo establecer "
+					+ "conexion con el servidor. Comprueba que este está funcionando"
+					+ " junto a la Base de Datos del sistema... ", "Ventas", 2);*/
 		}
 
 		File archivo = new File(ARCHIVO);
