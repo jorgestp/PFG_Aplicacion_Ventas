@@ -36,23 +36,42 @@ import uned.pfg.bean.ArticuloPedido;
 import uned.pfg.ws.WS_ArticulosPedido;
 import uned.pfg.ws.WS_ArticulosPedidoProxy;
 
-
+/**
+ * Clase que consume el servicio web del servidor, de modo que, recoge los articulos de un pedido
+ * cuyo id es pasado al constructor.
+ * 
+ * 
+ * @author JORGE VILLALBA RUIZ 47536486V
+ * @version 1.0
+ */
 public class ServicioArticulos_Pedido {
 
 	private static final String ARCHIVO = "XML_art.xml";
 	private static final String SEND = "XML_artPedido_send.xml";
 	String id;
 	
+	/**
+	 * Recoge el id del pedido que se quiere desglosar y se lo asigna al campo de clase.
+	 * Ademas, llama al metodo privado para llamar al servicio web y su respectivo meto.
+	 * @param id String que representa el id de un pedido
+	 */
 	public ServicioArticulos_Pedido(String id) {
 		
 		this.id = id;
 		cogerServicio();
 	}
 	
+	/**
+	 * Constructor por defecto
+	 */
 	public ServicioArticulos_Pedido() {
 		
 	}
 	
+	/**
+	 * Funcion privada que se encarga de inicializar el el servicio web
+	 * y consumir dicho servicio
+	 */
 	private void cogerServicio() {
 		
     	WS_ArticulosPedido ws_art = new WS_ArticulosPedidoProxy("http://localhost:8080/Aplicacion_Web/services/WS_ArticulosPedido");
@@ -69,15 +88,28 @@ public class ServicioArticulos_Pedido {
         }
 	}
 
+	/**
+	 * Devuelve String que representa el id del pedido
+	 * @return Identificacion del pedido
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * Establece el identificador del pedido al pasado por parametro
+	 * @param id Identificacion el pedido.
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 	
 	
+	/**
+	 * Funcion que, mediante el archivo creado en la llamada al web service,
+	 * se encarga de parsear dicho contenido en una lista de Articulos que tiene el pedido
+	 * @return Lista de articulos de un pedido dado.
+	 */
 	 public List<ArticuloPedido> parseXMLtoList(){
 	        
 	        List<ArticuloPedido> lista = new ArrayList<ArticuloPedido>();
@@ -144,6 +176,13 @@ public class ServicioArticulos_Pedido {
 	        return lista;
 	    }
 	
+	 
+	 /**
+	  * Funcion que parsea el contenido que se le pasa por parametro a String, 
+	  * creando un xml al respecto
+	  * @param listaArticulos Lista de Articulos de un pedido
+	  * @return String que representa al XML de la lista de articulos pasado por parametro.
+	  */
 	 public String crearXML_Articulos(List<ArticuloPedido> listaArticulos) {
 			
 			

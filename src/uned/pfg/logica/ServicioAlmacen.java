@@ -20,20 +20,35 @@ import org.w3c.dom.NodeList;
 import uned.pfg.bean.Almacen;
 import uned.pfg.ws.WS_Almacen;
 import uned.pfg.ws.WS_AlmacenProxy;
-import uned.pfg.ws.WS_Pedido;
-import uned.pfg.ws.WS_PedidoProxy;
 
 
+
+/**
+ * Clase que consume el servicio web del servidor, de modo que, recoge todos los articulos del
+ * almacen que han sido encontrados en la base de datos
+ * 
+ * 
+ * @author JORGE VILLALBA RUIZ 47536486V
+ * @version 1.0
+ */
 public class ServicioAlmacen {
 
 	private static final String ARCHIVO = "XML_almacen.xml";
 	
+	/**
+	 * Constructor por defecto que llama a una funcion privada, que establece la conexion
+	 * con el servicio web del servidor y llama al metodo de ese servicio web
+	 */
 	public ServicioAlmacen() {
 
 		cogerServicio();
 	}
 	
 	
+	/**
+	 * Funcion que llama al servicio web del servidor y al metodo de dicho servicio web.
+	 * En caso de lanzar una excepcion, muestra por pantalla una ventana informativa.
+	 */
 	private void cogerServicio() {
 		
 		WS_Almacen ws = new WS_AlmacenProxy("http://localhost:8080/Aplicacion_Web/services/WS_Almacen");
@@ -52,6 +67,11 @@ public class ServicioAlmacen {
 		
 	}
 
+	/**
+	 * Funcion que pasa el XML que ha sido recogido en la llama al servicio web y lo pasa
+	 * a una lista con todos los articulos del almacen.
+	 * @return Lista que representa a todos los articulos que tiene el almacen en la base de datos.
+	 */
 	public List<Almacen> parseXMLtoList() {
 		List<Almacen> lista = new ArrayList<Almacen>();
 		try {
@@ -101,7 +121,7 @@ public class ServicioAlmacen {
 
 		} catch (Exception ex) {
 
-			//ex.printStackTrace();
+			
 		}
 
 		File archivo = new File(ARCHIVO);

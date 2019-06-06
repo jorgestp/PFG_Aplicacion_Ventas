@@ -24,6 +24,14 @@ import uned.pfg.bean.Articulo;
 import uned.pfg.ws.WS_NuevoArticulo;
 import uned.pfg.ws.WS_NuevoArticuloProxy;
 
+/**
+ * Clase que consume el servicio web del servidor, de modo que manda al servidor
+ * un nuevo articulo que ha sido dado de alta
+ * 
+ * 
+ * @author JORGE VILLALBA RUIZ 47536486V
+ * @version 1.0
+ */
 public class ServicioNuevoArticulo {
 
 	
@@ -31,12 +39,24 @@ public class ServicioNuevoArticulo {
 	private Articulo art;
 	String envio;
 	
+	/**
+	 * Constructor que asigna a la variable de clase, la variable pasada por parametro,
+	 * y ademas, parsea dicha variable a un String con formato xml
+	 * @param art
+	 */
 	public ServicioNuevoArticulo(Articulo art) {
 
 		this.art = art;
 		envio = prepararPedido_paraServidor();
 	}
 	
+	/**
+	 * Funcion que inicia y consume el servicio web del servidor para dar de alta
+	 * a un nuevo articulo.
+	 * Dicho articulo es pasado en formato XML mediante un objeto de tipo String
+	 * @return String con el valor del resultado de la nueva insercicion, de modo que
+	 * en el caso de ocurrir algun error, devolverá "error", y "exito en caso de todo ir bien
+	 */
 	public String servicio() {
 		
 		WS_NuevoArticulo ws = new WS_NuevoArticuloProxy("http://localhost:8080/Aplicacion_Web/services/WS_NuevoArticulo");
@@ -54,6 +74,12 @@ public class ServicioNuevoArticulo {
 	}
 	
 	
+	/**
+	 * Funcion privada que en primer lugar crea un XML mediante el objeto Articulo
+	 * que tiene la variable de clase correspondiente. Luego, dicho XML es pasado a un archivo
+	 * y por ultimo, ese archivo es parseado a String para poder ser mandado por web service
+	 * @return
+	 */
 	private String prepararPedido_paraServidor() {
 
 		String s = "";

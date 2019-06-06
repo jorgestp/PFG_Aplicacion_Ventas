@@ -23,18 +23,35 @@ import uned.pfg.ws.WS_ArtSeleccionadoProxy;
 import uned.pfg.ws.WS_Articulo;
 import uned.pfg.ws.WS_ArticuloProxy;
 
-
+/**
+ * Clase que consume dos sevicios web correspondientes a un Articulo en concreto cuyo identificador
+ * será pasado a esta clase, o todos los articulos que hay en el sistema.
+ * 
+ * 
+ * @author JORGE VILLALBA RUIZ 47536486V
+ * @version 1.0
+ */
 public class ServicioArticulos {
 
 	
 	private static final String ARCHIVO = "XML_articulos.xml";
 	private static final String ARCHIVO_artSelec = "XML_artSelec.xml";
 	
+	/**
+	 * Constructor que llama a la funcion privada que se encarga de 
+	 * recoger del servidor mediante WS los articulos que hay en la BBDD.
+	 */
 	public ServicioArticulos() {
 
 		cogerServicio();
 	}
 	
+	/**
+	 * Constructor que llama a una funcion privada que se encarga de llamar y consumir
+	 * a un servidio web cuya funcion es devolver el articulo con identificador
+	 * pasado por parametro.
+	 * @param id String que representa el identificador del Articulo
+	 */
 	public ServicioArticulos(String id) {
 		
 		cogeServicioArticuloSeleccionado(id);
@@ -42,6 +59,10 @@ public class ServicioArticulos {
 	
 
 
+	/**
+	 * Funcion privada que llama y consume el servicio web que devuelve la lista de
+	 * los articulos que hay en el sistema y los almacena en formato XML en un archivo
+	 */
 	private void cogerServicio(){
 	       
 		   	
@@ -66,6 +87,11 @@ public class ServicioArticulos {
 	   
 	   
 	   
+		/**
+		 * Funcion privada que llama y consume el servicio web que devuelve 
+		 * el articulo que estamos buscando mediante su identificador
+		 *  y lo almacena en formato XML en un archivo
+		 */
 	   private void cogeServicioArticuloSeleccionado(String id) {
 		
 		   WS_ArtSeleccionado ws = new WS_ArtSeleccionadoProxy("http://localhost:8080/Aplicacion_Web/services/WS_ArtSeleccionado");
@@ -81,6 +107,11 @@ public class ServicioArticulos {
 		
 	}
 
+	   /**
+	    * Funcion que parsea el archivo XML que contiene todos los articulos del sistema
+	    * en un objeto de colecion de Articulos
+	    * @return Lista de Articulos pasados a objeto
+	    */
 	public List<Articulo> parseXMLtoList(){
 	       
 	       List<Articulo> lista = new ArrayList<Articulo>();
@@ -148,6 +179,12 @@ public class ServicioArticulos {
 	       return lista;
 	   }
 	   
+	
+	/**
+	 * Funcion que parsea el archivo que contiene el XMl de un articulo dado,
+	 * a un objeto de tipo Articulo
+	 * @return Objeto que representa al articulo que estabamos buscando
+	 */
 	public Articulo parseXMLtoArticulo(){
 	       
 	       Articulo art = new Articulo();

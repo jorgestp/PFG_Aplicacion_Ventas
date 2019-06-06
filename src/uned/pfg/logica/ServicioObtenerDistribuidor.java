@@ -22,15 +22,31 @@ import uned.pfg.bean.Pedido;
 import uned.pfg.ws.WS_Distribuidor;
 import uned.pfg.ws.WS_DistribuidorProxy;
 
+/**
+ * Clase que consume el servicio web del servidor, de modo que obtiene del servidor
+ * la lista de distribuidores que hay en el sistema registrados
+ * 
+ * 
+ * @author JORGE VILLALBA RUIZ 47536486V
+ * @version 1.0
+ */
 public class ServicioObtenerDistribuidor {
 
 	private static final String ARCHIVO = "XML_distribuidores.xml";
 
+	/**
+	 * COnstructor por defecto que llama a una funcion privada que consume el 
+	 * servicio web que devolverá un string en formato XML con los distribuidores que hay en el sistema.
+	 */
 	public ServicioObtenerDistribuidor() {
 
 		cogerServicio();
 	}
 
+	/**
+	 * Funcion privada que consume el 
+	 * servicio web que devolverá un string en formato XML con los distribuidores que hay en el sistema.
+	 */
 	private void cogerServicio() {
 
 		WS_Distribuidor ws = new WS_DistribuidorProxy("http://localhost:8080/Aplicacion_Web/services/WS_Distribuidor");
@@ -48,6 +64,12 @@ public class ServicioObtenerDistribuidor {
 		}
 	}
 
+	/**
+	 * Funcion privada que parsea el resultado de la llamada al servicio web (que devuelve
+	 * un string en formato XML) a una lista de Objeto Distribuidor
+	 * @return Lista de Objetos de tipo Distribuidor que representa a los distribuidores
+	 * que hay en el sistema registrados.
+	 */
 	public List<Distribuidor> parseXMLtoList() {
 
 		List<Distribuidor> lista = new ArrayList<Distribuidor>();
