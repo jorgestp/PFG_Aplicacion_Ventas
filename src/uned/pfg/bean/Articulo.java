@@ -11,10 +11,10 @@ import java.util.Date;
  */
 public class Articulo {
 
-	int id_articulo;
-	String nombre;
-	Date fecha_entrada;
-	double precio;
+	private int id_articulo;
+	private String nombre;
+	private Date fecha_entrada;
+	private double precio;
 	
 	
 	

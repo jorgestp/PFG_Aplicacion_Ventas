@@ -14,9 +14,9 @@ import java.util.Date;
  */
 public class Distribuidor {
 	
-	int id, tfno, cp;
-	String nombre, domicilio, email, pais, user, password;
-	Date fecha;
+	private int id, tfno, cp;
+	private String nombre, domicilio, email, pais, user, password;
+	private Date fecha;
 	
 	
 	/**
