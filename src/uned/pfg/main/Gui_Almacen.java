@@ -56,7 +56,7 @@ public class Gui_Almacen extends javax.swing.JFrame {
         tabla.setModel(modelo);
         scroll.setViewportView(tabla);
         ContruirTabla();
-        
+        setTitle("VENTAS - Almacén ");
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
